@@ -1,7 +1,14 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <router-view/>
+
+    <!-- 顶部header -->
+    <mt-header fixed title="固定在顶部"></mt-header>
+
+    <!-- 中间router -->
+
+    <!-- 底部nav -->
+    <h1>这是主页面---APP.VUE</h1>
+
   </div>
 </template>
 

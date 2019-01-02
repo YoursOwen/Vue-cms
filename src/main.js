@@ -4,6 +4,16 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 
+// 引入Mint框架
+import Mint from 'mint-ui'
+import 'mint-ui/lib/style.css'
+
+Vue.use(Mint)
+
+import '@'
+
+
+
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
