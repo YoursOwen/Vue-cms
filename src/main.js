@@ -1,13 +1,24 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-import less from 'less'
+// 安装引入Vue-resource
+import vueRource from 'vue-resource'
+// 安装Vue-resource
+Vue.use(vueRource)
+
+Vue.http.options.root = 'http://vue.lovegf.cn:8899'
+// Post请求不支持application，转化为传统表单格式
+Vue.http.options.emulateJSON = true;
+
 
 // 引入Mint框架
 import Mint from 'mint-ui'
 import 'mint-ui/lib/style.css'
 
 Vue.use(Mint)
+
+
+
 
 // 引用mui框架
 // import './lib/mui/js/mui'   不需要引入，引入会报错

@@ -1,12 +1,15 @@
 <template>
-  <div id="app">
+  <div id="app" class="app-container">
 
     <!-- 顶部header -->
     <mt-header fixed title="固定在顶部"></mt-header>
 
-    <!-- 中间router -->
+		<!-- 过渡动画 -->
+    <transition>
+		<!-- 中间router -->
 		<!-- 匹配规则都有的情况下，要给个坑占位置 -->
 		<router-view></router-view>
+		</transition>
 
     <!-- 底部nav -->
     <nav class="mui-bar mui-bar-tab">
@@ -37,13 +40,29 @@ export default {
 }
 </script>
 
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+<style lang="less" scoped>
+.app-container {
+	padding-top: 40px;
+	padding-bottom: 60px;
+	overflow-x: hidden;
 }
+
+.v-enter {
+	opacity: 0;
+	transform: translateX(100%);
+}
+.v-leave-to {
+	opacity: 0;
+	transform: translateX(-100%);
+	// 移动的时候会占位置，所以要absolute空出位置
+	position: absolute;
+}
+.v-enter-active,
+.v-leave-active {
+	transition: all .5s ease-in
+}
+
+
+
 </style>
+
