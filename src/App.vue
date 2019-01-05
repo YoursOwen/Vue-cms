@@ -46,7 +46,6 @@ export default {
 	padding-bottom: 60px;
 	overflow-x: hidden;
 }
-
 .v-enter {
 	opacity: 0;
 	transform: translateX(100%);
