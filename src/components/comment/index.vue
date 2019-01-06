@@ -2,8 +2,8 @@
   <div class="commentContainer">
     <h3>发表评论</h3>
     <hr>
-    <textarea name="" id="" placeholder="请输入要BB的内容（最多吐槽120字）" maxlength="120"></textarea>
-    <mt-button type="primary" size="large">发表评论</mt-button>
+    <textarea name="" id="" placeholder="请输入要BB的内容（最多吐槽120字）" maxlength="120" v-model="msg"></textarea>
+    <mt-button type="primary" size="large" @click="postComment">发表评论</mt-button>
 
     <div class="cmt-list">
       <div class="cmt-item" v-for="(item,index) in commentMsg" :key="index">
@@ -22,11 +22,14 @@
 </template>
 
 <script>
+import { Toast } from 'mint-ui';
+
 export default {
   data() {
     return {
       commentMsg:[],
       pageindex:1,
+      msg:"", //评论输入的内容
     }
   },
   props:['id'],
@@ -52,6 +55,28 @@ export default {
     addmore() {
       this.pageindex++;
       this.getCommentsHandle();
+    },
+    postComment() {
+      if(this.msg.trim() == "") {
+        return Toast("请输入有效内容！")
+      }
+
+      this.$http.post(`api/postcomment/${this.id}`,{content:this.msg.trim()})
+      .then( res => {
+        if(res.body.status === 0) {
+          //添加成功后重新加载
+          //1.清空数据commentMsg
+          this.commentMsg = []
+          //2.重新初始化页数
+          this.pageindex = 1
+          //3.清空textarea,这就是为什么要用v-model进行双向数据绑定
+          this.msg = ""
+          //4.重新获取数据
+          this.getCommentsHandle()
+        } else {
+          Toast("评论添加失败哦！")
+        }
+      })
     }
   }
 
@@ -68,8 +93,6 @@ export default {
     height: 85px;
     font-size: 14px;
     margin-bottom: 5px;
-
-
   }
   .cmt-list {
     margin: 5px 0;
@@ -91,7 +114,6 @@ export default {
     background-color: transparent;
     border: 1px solid orangered;
     color: orangered;
-
   }
 }
 </style>
