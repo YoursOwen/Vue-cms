@@ -22,15 +22,16 @@ Vue.filter('timeFliter', function (value) {
   return moment(value).format('YYYY-MM-DD HH:mm:ss')
 })
 
-
-
 // 引用mui框架
 // import './lib/mui/js/mui'   不需要引入，引入会报错
 import './lib/mui/css/mui.css'
 import './lib/mui/css/icons-extra.css'
 import './lib/mui/fonts/mui-icons-extra.ttf'
 
-
+//定义全局的评论组件，多个地方会用的到建议定义全局
+import comment from './components/comment/index.vue'
+//第一个参数是组件名，第二个参数是引用的模板
+Vue.component('comment',comment)
 
 
 
