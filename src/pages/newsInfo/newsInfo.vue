@@ -8,6 +8,12 @@
     <hr>
 
     <div v-html="newsInfo.content"></div>
+
+    <h3>发表评论</h3>
+    <hr>
+    <textarea name="" id="" placeholder="请输入要BB的内容（最多吐槽120字）"></textarea>
+
+
   </div>
 </template>
 
@@ -52,6 +58,13 @@ export default {
       color:#226aff;
 
     }
+  }
+
+  textarea {
+    height: 85px;
+    font-size: 14px;
+    color: #ccc;
+
   }
 
 }
