@@ -6,16 +6,19 @@
     <mt-button type="primary" size="large">发表评论</mt-button>
 
     <div class="cmt-list">
-      <div class="cmt-item">
+      <div class="cmt-item" v-for="(item,index) in commentMsg" :key="index">
         <div class="cmt-header">
-        第1楼  用户：匿名用户  发表时间：2019-01-06 18:55:25
+        第{{ index+1 }}楼  用户：{{ item.user_name }}  发表时间：{{ item.add_time | timeFliter }}
         </div>
         <div class="cmt-body">
-          哈哈哈测试哦
+          {{ item.content }}
         </div>
       </div>
     </div>
+    <mt-button type="danger" size='large' class="addmore" @click="addmore">加载更多</mt-button>
   </div>
+
+
 </template>
 
 <script>
@@ -23,21 +26,32 @@ export default {
   data() {
     return {
       commentMsg:[],
+      pageindex:1,
     }
   },
   props:['id'],
   created() {
     this.getCommentsHandle()
   },
+  // updated() {
+  //   this.getCommentsHandle()
+  // },
   methods:{
     getCommentsHandle() {
-      this.$http.get(`api/getcomments/${this.id}?pageindex=1`)
+      this.$http.get(`api/getcomments/${this.id}?pageindex=${this.pageindex}`)
       .then( res => {
         if(res.body.status === 0) {
-          this.commentMsg = res.body.message
+
+          //通过数组的concat方法将服务器新获取的数据与老数据拼接
+          this.commentMsg = this.commentMsg.concat(res.body.message);
+        } else {
+          Toast("评论数据获取失败！")
         }
       })
-
+    },
+    addmore() {
+      this.pageindex++;
+      this.getCommentsHandle();
     }
   }
 
@@ -54,7 +68,7 @@ export default {
     height: 85px;
     font-size: 14px;
     margin-bottom: 5px;
-    color: #ccc;
+
 
   }
   .cmt-list {
@@ -72,6 +86,12 @@ export default {
         font-size: 12px;
       }
     }
+  }
+  .addmore {
+    background-color: transparent;
+    border: 1px solid orangered;
+    color: orangered;
+
   }
 }
 </style>
