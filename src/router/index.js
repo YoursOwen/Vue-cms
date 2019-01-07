@@ -8,6 +8,7 @@ import searchContainer from '../pages/search/index.vue'
 import shopcarContainer from '../pages/shopcar/index.vue'
 import newsList from '../pages/newsInfo/index.vue'
 import newsInfo from '../pages/newsInfo/newsInfo.vue'
+import photoList from '../pages/photoInfo/index.vue'
 Vue.use(Router)
 
 export default new Router({
@@ -39,6 +40,10 @@ export default new Router({
     {
       path:'/home/newsInfo/:id',
       component:newsInfo
+    },
+    {
+      path:'/home/photolist',
+      component:photoList
     }
   ],
   linkActiveClass:"mui-active"
