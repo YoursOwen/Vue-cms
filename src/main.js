@@ -33,6 +33,10 @@ import comment from './components/comment/index.vue'
 //第一个参数是组件名，第二个参数是引用的模板
 Vue.component('comment',comment)
 
+// lazy load
+import { Lazyload } from 'mint-ui'
+Vue.use(Lazyload)
+
 
 
 Vue.config.productionTip = false
