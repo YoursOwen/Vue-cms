@@ -7,7 +7,6 @@
     </p>
     <hr>
 
-
     <div class="photo-view">
         <img
         class="preview-img"
@@ -22,8 +21,6 @@
     <div class="photo-content" v-html="imagesInfo.content "></div>
 
     <comment :id="id"></comment>
-
-
 
   </div>
 </template>
