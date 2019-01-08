@@ -37,6 +37,10 @@ Vue.component('comment',comment)
 import { Lazyload } from 'mint-ui'
 Vue.use(Lazyload)
 
+//引用vue-preview
+import Vuepreview from 'vue2-preview'
+Vue.use(Vuepreview)
+
 
 
 Vue.config.productionTip = false

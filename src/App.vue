@@ -42,6 +42,9 @@ export default {
 </script>
 
 <style lang="less" scoped>
+#app {
+	background-color: #fff;
+}
 .app-container {
 	padding-top: 40px;
 	padding-bottom: 60px;
