@@ -2,7 +2,7 @@
   <div class="goodsInfoContainer">
 
    <transition @before-enter="bEnter" @enter='enter' @after-enter="aEnter">
-      <div class="ball" v-show="ballFlag"></div>
+      <div class="ball" v-show="ballFlag" ref="ball"></div>
    </transition>
 
     <div class="mui-card">
@@ -109,9 +109,19 @@
       enter(el,done) {
         el.offsetHeight;
 
-        el.style.transform = 'translate(73px,242px)'
+        // el.style.transform = 'translate(73px,242px)'
 
-        el.style.transition = "all 3s ease"
+        //获取小球在页面位置
+        const ballPosition = this.$refs.ball.getBoundingClientRect()
+        //获取徽标在页面位置
+        const badgePosition = document.querySelector(".mui-badge").getBoundingClientRect()
+
+        const xDist = badgePosition.left - ballPosition.left;
+        const yDist = badgePosition.top - ballPosition.top;
+
+         el.style.transform = `translate(${xDist}px, ${yDist}px)`;
+
+        el.style.transition = "all 0.5s cubic-bezier(.4,-0.3,1,.68)"
 
         done()
       },
