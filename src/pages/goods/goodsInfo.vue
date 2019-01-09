@@ -1,7 +1,7 @@
 <template>
   <div class="goodsInfoContainer">
 
-   <transition>
+   <transition @before-enter="bEnter" @enter='enter' @after-enter="aEnter">
       <div class="ball" v-show="ballFlag"></div>
    </transition>
 
@@ -39,7 +39,7 @@
           </div>
           <p>
             <mt-button type="primary" size='small'>立即购买</mt-button>
-            <mt-button type="danger" size='small'>加入购物车</mt-button>
+            <mt-button type="danger" size='small' @click="ballRun">加入购物车</mt-button>
           </p>
         </div>
       </div>
@@ -97,7 +97,28 @@
             this.goodsInfo = res.body.message[0]
           }
         })
-      }
+      },
+      ballRun() {
+        //将商品加入购物车的时候控制小球
+        this.ballFlag = !this.ballFlag
+      },
+      bEnter(el) {
+       el.style.transform = 'translate(0,0)'
+
+      },
+      enter(el,done) {
+        el.offsetHeight;
+
+        el.style.transform = 'translate(73px,242px)'
+
+        el.style.transition = "all 3s ease"
+
+        done()
+      },
+      aEnter(el) {
+        this.ballFlag = !this.ballFlag;
+      },
+
     },
   }
 
@@ -114,6 +135,7 @@
       left: 153px;
       top: 391px;
       z-index: 999;
+      // transform: translate(73px,242px)
     }
     .mint-swipe {
       height: 200px;

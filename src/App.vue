@@ -5,7 +5,7 @@
     <mt-header fixed title="固定在顶部"></mt-header>
 
 		<!-- 过渡动画 -->
-    <transition>
+    <transition name="app">
 		<!-- 中间router -->
 		<!-- 匹配规则都有的情况下，要给个坑占位置 -->
 		<router-view></router-view>
@@ -37,7 +37,7 @@
 
 <script>
 export default {
-  name: 'App'
+
 }
 </script>
 
@@ -50,18 +50,18 @@ export default {
 	padding-bottom: 60px;
 	overflow-x: hidden;
 }
-.v-enter {
+.app-enter {
 	opacity: 0;
 	transform: translateX(100%);
 }
-.v-leave-to {
+.app-leave-to {
 	opacity: 0;
 	transform: translateX(-100%);
 	// 移动的时候会占位置，所以要absolute空出位置
 	position: absolute;
 }
-.v-enter-active,
-.v-leave-active {
+.app-enter-active,
+.app-leave-active {
 	transition: all .5s ease-in
 }
 
