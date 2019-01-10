@@ -18,7 +18,7 @@
     </div>
 
     <div class="mui-card">
-      <div class="mui-card-header">商品名称</div>
+      <div class="mui-card-header">{{ goodsInfo.title }}</div>
       <div class="mui-card-content">
         <div class="mui-card-content-inner">
           <p class="price">
@@ -31,10 +31,10 @@
             购买数量：
             <div class="mui-numbox" data-numbox-min='0' data-numbox-max='100'>
               <!-- "-"按钮，点击可减小当前数值 -->
-              <button class="mui-btn mui-numbox-btn-minus" type="button">-</button>
-              <input class="mui-numbox-input" type="number" value="1" />
+              <button class="mui-btn mui-numbox-btn-minus" type="button" @click="subHandler">-</button>
+              <input class="mui-numbox-input" type="number" v-model="num" />
               <!-- "+"按钮，点击可增大当前数值 -->
-              <button class="mui-btn mui-numbox-btn-plus" type="button">+</button>
+              <button class="mui-btn mui-numbox-btn-plus" type="button" @click="addHandler">+</button>
             </div>
           </div>
           <p>
@@ -74,6 +74,7 @@
         id: this.$route.params.id,
         lunbo: [],
         ballFlag:false,
+        num:1,
       }
     },
     created() {
@@ -92,7 +93,6 @@
       getGoodsInfoHandler() {
         this.$http.get('api/goods/getinfo/'+this.id)
         .then(res => {
-          console.log(res)
           if(res.body.status === 0) {
             this.goodsInfo = res.body.message[0]
           }
@@ -119,7 +119,7 @@
         const xDist = badgePosition.left - ballPosition.left;
         const yDist = badgePosition.top - ballPosition.top;
 
-         el.style.transform = `translate(${xDist}px, ${yDist}px)`;
+        el.style.transform = `translate(${xDist}px,${yDist}px)`
 
         el.style.transition = "all 0.5s cubic-bezier(.4,-0.3,1,.68)"
 
@@ -128,7 +128,12 @@
       aEnter(el) {
         this.ballFlag = !this.ballFlag;
       },
-
+      addHandler() {
+        console.log("add++")
+      },
+      subHandler() {
+        console.log("sub--")
+      }
     },
   }
 
@@ -145,7 +150,6 @@
       left: 153px;
       top: 391px;
       z-index: 999;
-      // transform: translate(73px,242px)
     }
     .mint-swipe {
       height: 200px;

@@ -41,6 +41,8 @@ Vue.use(Lazyload)
 import Vuepreview from 'vue2-preview'
 Vue.use(Vuepreview)
 
+//引入VueX
+import store from '../store/'
 
 
 Vue.config.productionTip = false
@@ -48,6 +50,7 @@ Vue.config.productionTip = false
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
+  render: c => c(App),
   router,
-  render: c => c(App)
+  store,
 })
