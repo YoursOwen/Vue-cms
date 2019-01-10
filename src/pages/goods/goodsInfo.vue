@@ -29,12 +29,12 @@
           </p>
           <div class="buy-count">
             购买数量：
-            <div class="mui-numbox" data-numbox-min='0' data-numbox-max='100'>
+            <div class="mui-numbox" data-numbox-min='0' data-numbox-max='60' >
               <!-- "-"按钮，点击可减小当前数值 -->
-              <button class="mui-btn mui-numbox-btn-minus" type="button" @click="subHandler">-</button>
-              <input class="mui-numbox-input" type="number" v-model="num" />
+              <button class="mui-btn mui-numbox-btn-minus" type="button">-</button>
+              <input class="mui-numbox-input" type="number" v-model="buyCount" @change='change' ref='numBox'/>
               <!-- "+"按钮，点击可增大当前数值 -->
-              <button class="mui-btn mui-numbox-btn-plus" type="button" @click="addHandler">+</button>
+              <button class="mui-btn mui-numbox-btn-plus" type="button">+</button>
             </div>
           </div>
           <p>
@@ -74,7 +74,8 @@
         id: this.$route.params.id,
         lunbo: [],
         ballFlag:false,
-        num:1,
+        max:'',
+        buyCount:1,
       }
     },
     created() {
@@ -95,12 +96,18 @@
         .then(res => {
           if(res.body.status === 0) {
             this.goodsInfo = res.body.message[0]
+            this.max = res.body.message[0].stock_quantity
           }
         })
       },
       ballRun() {
         //将商品加入购物车的时候控制小球
         this.ballFlag = !this.ballFlag
+
+        let goodsInfo = {id:this.id ,count: this.buyCount,
+        price: this.goodsInfo.sell_price,selected: true}
+
+        this.$store.commit('addToCar',goodsInfo)
       },
       bEnter(el) {
        el.style.transform = 'translate(0,0)'
@@ -128,11 +135,13 @@
       aEnter(el) {
         this.ballFlag = !this.ballFlag;
       },
-      addHandler() {
-        console.log("add++")
-      },
-      subHandler() {
-        console.log("sub--")
+      change() {
+        this.buyCount = parseInt(this.$refs.numBox.value)
+      }
+    },
+    watch: {
+      'max'(newVal,oldVal) {
+
       }
     },
   }

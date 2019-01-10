@@ -7,6 +7,7 @@ import mutations from './mutations'
 
 const state = {
   phoneCount:0,
+  car:[],
 }
 
 export default new Vuex.Store({
