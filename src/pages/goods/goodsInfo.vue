@@ -81,6 +81,7 @@
     created() {
       this.getLunboHandler()
       this.getGoodsInfoHandler()
+
     },
     methods: {
       getLunboHandler() {
@@ -141,7 +142,7 @@
     },
     watch: {
       'max'(newVal,oldVal) {
-
+        // mui('.mui-numbox').numbox().setOption('max',this.max)
       }
     },
   }
