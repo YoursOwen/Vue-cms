@@ -5,9 +5,11 @@ Vue.use(Vuex)
 import getters from './getters'
 import mutations from './mutations'
 
+console.log(JSON.parse(localStorage.getItem('car') || '[]'))
+
 const state = {
-  phoneCount:0,
-  car:[],
+
+  car:JSON.parse(localStorage.getItem('car') || '[]'),
 }
 
 export default new Vuex.Store({

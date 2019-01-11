@@ -29,7 +29,7 @@
           </p>
           <div class="buy-count">
             购买数量：
-            <div class="mui-numbox" data-numbox-min='0' data-numbox-max='60' >
+            <div class="mui-numbox" data-numbox-min='1' data-numbox-max='60' >
               <!-- "-"按钮，点击可减小当前数值 -->
               <button class="mui-btn mui-numbox-btn-minus" type="button">-</button>
               <input class="mui-numbox-input" type="number" v-model="buyCount" @change='change' ref='numBox'/>
