@@ -1,18 +1,18 @@
 <template>
   <div class='shopcar-container'>
-    <div class="mui-card">
+    <div class="mui-card" v-for="item in listCar" :key="item.id">
 				<div class="mui-card-content">
 					<div class="mui-card-content-inner">
-						<mt-switch v-model="value"></mt-switch>
-            <img src="http://www.lovegf.cn:8899/xm1.jpg" alt="">
+						<mt-switch v-model="$store.getters.goodsState[item.id]"></mt-switch>
+            <img :src="item.thumb_path" alt="">
             <div class="info">
-              <h3>苹果Apple iPhone 6 Plus 16G 4G手机（联通三网版）</h3>
-              <p>￥5780</p>
+              <h3>{{ item.title }}</h3>
+              <p>￥{{ item.sell_price }}</p>
               <div>
                 <div class="mui-numbox" data-numbox-min='1' data-numbox-max='60' >
                 <!-- "-"按钮，点击可减小当前数值 -->
                 <button class="mui-btn mui-numbox-btn-minus" type="button">-</button>
-                <input class="mui-numbox-input" type="number"/>
+                <input class="mui-numbox-input" type="number" v-model="$store.getters.goodsCount[item.id]"/>
                 <!-- "+"按钮，点击可增大当前数值 -->
                 <button class="mui-btn mui-numbox-btn-plus" type="button">+</button>
               </div>
@@ -46,6 +46,35 @@ export default {
   data() {
     return {
       value:true,
+      listCar:[],
+    }
+  },
+  created() {
+    this.getshopCarList()
+  },
+  methods: {
+
+    getshopCarList() {
+
+      let car = this.$store.state.car;
+
+      let id = [];
+
+      car.forEach( item => {
+        id.push(item.id)
+      })
+
+      // 函数内部，没有数据就return掉
+      if(id.length == 0) {
+        return;
+      }
+
+      this.$http.get('api/goods/getshopcarlist/'+id.join(","))
+      .then( res => {
+        if(res.body.status === 0) {
+          this.listCar = res.body.message
+        }
+      })
     }
   },
 }
