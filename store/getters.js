@@ -19,6 +19,19 @@ export default {
       selected[item.id] = item.selected
     })
     return selected;
+  },
+  totalCar(state) {
+    let amount ={
+      totalPrice:0,
+      totalCount:0
+    }
+    state.car.forEach( item => {
+     if(item.selected) {
+      amount.totalCount += parseInt(item.count)
+      amount.totalPrice += item.count * item.price
+     }
+    })
+    return amount;
   }
 
 }

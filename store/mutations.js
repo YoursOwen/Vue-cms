@@ -20,4 +20,26 @@ export default {
     //()中不应该使用goodsInfo，因为goods.info=>{},而是把state.car
     localStorage.setItem('car',JSON.stringify(state.car));
   },
+  changeSelected(state,select) {
+    state.car.forEach( item => {
+      if(item.id == select.id) {
+        item.selected = !select.selected;
+      }
+    });
+  },
+  changeCount(state,change) {
+    // state.car.forEach( item=> {
+    //   if(item.id == change.id) {
+    //     item.count = parseInt(change.count);
+    //   }
+    // })
+    //some方法更节省内存
+    state.car.some( item=> {
+      if(item.id == change.id) {
+        item.count = parseInt(change.count);
+        return true;
+      }
+    })
+    localStorage.setItem('car',JSON.stringify(state.car))
+  }
 }
