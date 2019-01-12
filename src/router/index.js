@@ -13,6 +13,8 @@ import photoInfo from '../pages/photoInfo/photoInfo.vue'
 import goodsList from '../pages/goods/index.vue'
 import goodsDetail from '../pages/goods/goodsInfo.vue'
 import goodsComment from '../pages/goodsComment/index.vue'
+import goodsDesc from '../pages/goodsDesc/index.vue'
+
 Vue.use(Router)
 
 export default new Router({
@@ -68,9 +70,9 @@ export default new Router({
       name:'goodsComment'
     },
     {
-      path:'/home/goodsInfo/:id',
-      component:goodsDetail,
-      name:'goodsInfo'
+      path:'/home/goodsInfo/goodsdesc/:id',
+      component:goodsDesc,
+      name:'goodsDesc'
     },
 
   ],
