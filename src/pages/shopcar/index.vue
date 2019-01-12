@@ -31,7 +31,7 @@
 					<div class="mui-card-content-inner qucik">
 						<div class="left">
               <p>总计（不含运费）</p>
-              <p>已勾选商品 <span>{{$store.getters.totalCar.totalCount}}</span> 件， 总价<span>{{$store.getters.totalCar.totalPrice}}</span></p>
+              <p>已勾选商品 <span>{{$store.getters.totalCar.totalCount}}</span> 件， 总价<span>¥{{$store.getters.totalCar.totalPrice}}</span></p>
             </div>
             <mt-button type="danger" size="small">结算</mt-button>
 					</div>

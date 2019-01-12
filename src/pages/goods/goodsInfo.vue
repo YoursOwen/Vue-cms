@@ -56,8 +56,8 @@
         </div>
       </div>
       <div class="mui-card-footer">
-        <mt-button type="primary" size='large' plain >图文介绍</mt-button>
-        <mt-button type="danger" size="large" plain >商品评论</mt-button>
+        <mt-button type="primary" size='large' plain @click="goDesc(id)" >图文介绍</mt-button>
+        <mt-button type="danger" size="large" plain @click="goComment(id)">商品评论</mt-button>
 
 
       </div>
@@ -140,13 +140,13 @@
       change() {
         this.buyCount = parseInt(this.$refs.numBox.value)
       },
-      sub(){},
-      add(){}
-    },
-    watch: {
-      'max'(newVal,oldVal) {
-        // mui('.mui-numbox').numbox().setOption('max',this.max)
+      goComment(id) {
+         this.$router.push({ name: 'goodsComment', params: { id }})
+      },
+      goDesc(id) {
+        this.$router.push({ name: 'goodsDesc', params: { id }})
       }
+
     },
   }
 
