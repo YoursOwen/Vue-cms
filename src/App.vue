@@ -2,7 +2,7 @@
   <div id="app" class="app-container">
 
     <!-- 顶部header -->
-    <mt-header fixed title="固定在顶部"></mt-header>
+    <mt-header fixed title="小兔子便利店"></mt-header>
 
 		<!-- 过渡动画 -->
     <transition name="app">
