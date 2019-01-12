@@ -16,8 +16,8 @@
                   <input type="text" :value="$store.getters.goodsCount[item.id]" ref="inputBox" @change='changeCount(item.id,i)'>
                   <input type="button" value="+" @click="add(item.id,i)">
                 </div>
-
-              <a href="#">删除</a>
+              <!-- 事件修饰符阻止a默认行为 -->
+              <a href="#" @click.prevent="removeGoods(item.id,i)">删除</a>
               </div>
             </div>
 					</div>
@@ -100,6 +100,12 @@ export default {
       console.log("数量被改变了----",id,i)
        let goodsCount = this.$refs.inputBox[i].value
       this.$store.commit("changeCount",{id,count:goodsCount})
+    },
+    removeGoods(id,i) {
+      this.listCar.splice(i,1)
+      // console.log("我删除了")
+      this.$store.commit('removeGoods',id)
+
     }
 
   },

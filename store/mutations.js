@@ -41,5 +41,13 @@ export default {
       }
     })
     localStorage.setItem('car',JSON.stringify(state.car))
+  },
+  removeGoods(state,id) {
+    state.car.some((item,i)=>{
+      if(item.id == id) {
+        state.car.splice(i,1)
+      }
+    })
+    localStorage.setItem('car',JSON.stringify(state.car))
   }
 }
