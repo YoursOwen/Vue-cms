@@ -29,13 +29,14 @@
           </p>
           <div class="buy-count">
             购买数量：
-            <div class="mui-numbox" data-numbox-min='1' data-numbox-max='60' >
-              <!-- "-"按钮，点击可减小当前数值 -->
-              <button class="mui-btn mui-numbox-btn-minus" type="button">-</button>
-              <input class="mui-numbox-input" type="number" v-model="buyCount" @change='change' ref='numBox'/>
-              <!-- "+"按钮，点击可增大当前数值 -->
-              <button class="mui-btn mui-numbox-btn-plus" type="button">+</button>
-            </div>
+            <div class="num-box">
+
+               <!-- || 一般用于默认值的处理 -->
+              <!-- && 如果前面的结果为false , 后面的代码就不会执行 -->
+                  <input type="button" value="-" @click="buyCount>1&&buyCount--" :disabled="buyCount<=1">
+                  <input type="text" v-model="buyCount" ref="inputBox" >
+                  <input type="button" value="+" @click="buyCount<goodsInfo.stock_quantity&&buyCount++">
+                </div>
           </div>
           <p>
             <mt-button type="primary" size='small'>立即购买</mt-button>
@@ -138,7 +139,9 @@
       },
       change() {
         this.buyCount = parseInt(this.$refs.numBox.value)
-      }
+      },
+      sub(){},
+      add(){}
     },
     watch: {
       'max'(newVal,oldVal) {
@@ -176,15 +179,24 @@
         font-size: 16px;
       }
     }
-    .buy-count {
-      margin-bottom: 10px;
-      color: #8f8f94;
-      .mui-numbox {
+     .num-box {
         position: relative;
         display: inline-block;
         overflow: hidden;
+        height: 35px;
+        input[type="text"] {
+          width: 50px;
+          height: 100%;
+          text-align: center;
+          padding: 0;
+          margin: 0;
+          box-sizing: border-box;
+        }
+        input[type="button"] {
+          width: 40px;
+          height: 100%;
+        }
       }
-    }
      .mui-card-footer {
       display: block;
     button {
