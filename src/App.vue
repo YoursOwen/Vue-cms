@@ -2,7 +2,11 @@
   <div id="app" class="app-container">
 
     <!-- 顶部header -->
-    <mt-header fixed title="小兔子便利店"></mt-header>
+  	<mt-header fixed title="小兔子便利店">
+			<a href="#" slot="left" @click.prevent="$router.go(-1)" v-show="$route.path != '/home'">
+			<mt-button icon="back">返回</mt-button>
+			</a>
+		</mt-header>
 
 		<!-- 过渡动画 -->
     <transition name="app">
@@ -35,11 +39,6 @@
   </div>
 </template>
 
-<script>
-export default {
-
-}
-</script>
 
 <style lang="less" scoped>
 #app {
@@ -93,7 +92,6 @@ export default {
     overflow: hidden;
     text-overflow: ellipsis;
 }
-
 
 </style>
 
