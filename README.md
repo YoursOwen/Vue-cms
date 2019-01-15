@@ -2,6 +2,8 @@
 
 > A Vue.js project
 
+https://github.com/YoursOwen/Vue-cms.git
+
 ## Build Setup
 
 ``` bash
